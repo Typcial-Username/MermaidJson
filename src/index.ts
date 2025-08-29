@@ -1,7 +1,7 @@
 import { writeFileSync, readFileSync } from 'fs'
 import { resolve } from 'path';
 import { generateFlowchartDiagram } from './types/Flowchart'
-import type { MermaidGraph } from './Types';
+import type { MermaidGraph } from './types/Types';
 import type { FlowchartNode } from './types/Flowchart'
 import { generatePieChartDiagram } from './types/PieChart';
 

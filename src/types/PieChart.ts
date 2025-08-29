@@ -1,4 +1,4 @@
-import { MermaidGraph } from "../Types";
+import { MermaidGraph } from "./Types";
 
 export type PieChartOptions = {
     graphType: 'pie',

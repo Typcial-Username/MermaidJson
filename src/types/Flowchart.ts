@@ -1,4 +1,4 @@
-import { MermaidGraph } from "../Types";
+import { MermaidGraph } from "./Types";
 
 type Direction = 'TB' | 'TD' | 'BT' | 'RL' | 'LR';
 export type LineType = 'Arrow' | 'Open' | 'Thick' | 'Dotted' | 'Invisible';
