@@ -1,11 +1,57 @@
 {
-  "name": "mermaidjson",
-  "module": "index.ts",
+  "name": "mermaid-json",
+  "displayName": "MermaidJson",
+  "description": "A TypeScript library to generate Mermaid.js diagrams from JSON data",
+  "version": "0.1.0",
+  "author": "Levi Terry <levi@leviterry.dev>",
   "type": "module",
-  "devDependencies": {
-    "@types/bun": "latest"
+  "types": "dist/index.d.ts",
+  "module": "index.ts",
+  "homepage": "https://github.com/Typcial-Username/MermaidJson",
+  "keywords": [
+    "mermaid",
+    "json",
+    "flowchart",
+    "graph",
+    "diagram"
+  ],
+  "scripts": {
+    "build": "tsc && tsc --module commonjs --outDir ./dist/cjs",
+    "prepare": "npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "peerDependencies": {
+  "license": "MIT",
+  "files": [
+    "dist/**/*",
+    "README.md",
+    "package.json"
+  ],
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Typcial-Username/MermaidJson"
+  },
+  "bugs": {
+    "url": "https://github.com/Typcial-Username/MermaidJson/issues"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
     "typescript": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
   }
 }
