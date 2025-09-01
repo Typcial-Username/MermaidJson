@@ -6,7 +6,7 @@
   "author": "Levi Terry <levi@leviterry.dev>",
   "type": "module",
   "types": "dist/index.d.ts",
-  "module": "index.ts",
+  "main": "dist/index.js",
   "homepage": "https://github.com/Typcial-Username/MermaidJson",
   "keywords": [
     "mermaid",
@@ -16,9 +16,9 @@
     "diagram"
   ],
   "scripts": {
-    "build": "tsc && tsc --module commonjs --outDir ./dist/cjs",
+    "build": "tsc && tsc -p tsconfig.cjs.json && tsc -p tsconfig.esm.json",
     "prepare": "npm run build",
-    "generate-config": "ts-node ./scripts/GenerateMermaidConfig.ts",
+    "generate-config": "ts-node ./src/scripts/GenerateMermaidConfig.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "license": "MIT",
@@ -26,13 +26,6 @@
     "dist/**/*",
     "README.md",
     "package.json"
-  ],
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist"
   ],
   "repository": {
     "type": "git",
@@ -43,7 +36,7 @@
   },
   "exports": {
     ".": {
-      "import": "./dist/index.mjs",
+      "import": "./dist/index.js",
       "require": "./dist/index.js",
       "types": "./dist/index.d.ts"
     }

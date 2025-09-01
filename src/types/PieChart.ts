@@ -1,4 +1,4 @@
-import { MermaidGraph } from "./Types";
+import type { MermaidGraph } from "./Types";
 
 export type PieChartOptions = {
     graphType: 'pie',
@@ -20,9 +20,8 @@ export function generatePieChartDiagram(data: MermaidGraph & PieChartOptions): s
   }
 
   diagram += `  %% Data\n`;
-  data.nodes.forEach(node => {
-    diagram += `  \"${node.label}\": ${node.value}\n`;
+  data.nodes.forEach((node: { label: string, value: number }) => {
+    diagram += `  "${node.label}": ${node.value}\n`;
   });
-
   return diagram;
 }

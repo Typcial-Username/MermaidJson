@@ -1,4 +1,4 @@
-import { MermaidGraph } from "./Types";
+import type { MermaidGraph } from "./Types";
 
 type Direction = 'TB' | 'TD' | 'BT' | 'RL' | 'LR';
 export type LineType = 'Arrow' | 'Open' | 'Thick' | 'Dotted' | 'Invisible';
@@ -159,7 +159,7 @@ export function generateFlowchartDiagram(data: MermaidGraph & FlowchartOptions):
     diagram += '\n'; // blank line after this parent's edges
   }
 
-  data.nodes.forEach(node => emitEdges(node));
+  data.nodes.forEach((node: FlowchartNode) => emitEdges(node));
 
   return diagram;
 }

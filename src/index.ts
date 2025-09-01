@@ -40,14 +40,25 @@ export function saveMermaidJSON(filepath: string, data: MermaidGraph) {
 // Turn MermaidJSON into Markdown diagram
 export function generateMermaidDiagram(data: MermaidGraph): string {
   console.log("Creating " + data.graphType + " diagram...");
+
+  let configStr = "---\nconfig:"
+
+  if (data.config) {
+    console.log("Using Mermaid Config:", data.config);
+    // Apply Mermaid Config to diagram generation
+    for (const key in data.config) {
+      configStr += `\n  ${key}: ${JSON.stringify(data.config[key as keyof typeof data.config], null, 2)}`;
+    }
+    configStr += '\n---\n';
+  }
+
   switch (data.graphType) {
     case 'flowchart': 
-      return generateFlowchartDiagram(data)
+      return configStr + generateFlowchartDiagram(data)
     case 'pie':
-      return generatePieChartDiagram(data)
+      return configStr + generatePieChartDiagram(data)
     default:
-      const _exhaustive: never = data;
-      throw new Error(`Unsupported graph type: ${(_exhaustive as any).graphType}`)
+      throw new Error(`Unsupported graph type: ${(data as MermaidGraph).graphType}`)
   }
 }
 
@@ -62,14 +73,22 @@ export function saveDiagramAsMarkdown(filepath: string, data: MermaidGraph) {
 const exampleGraph: MermaidGraph = {
   graphType: 'flowchart',
   direction: 'TD',
+  config: {
+    darkMode: true,
+    theme: 'dark',
+    look: 'handDrawn',
+  },
   nodes: [
     {
       id: 'start',
       label: 'Start',
+      // styleProps: {
+      //   fill: '#ff0000'
+      // },
       children: [
         {
-          id: 'end',
-          label: 'End',
+          id: 'stop',
+          label: 'Stop',
           lineType: 'Arrow'
         }
       ]
