@@ -1,11 +1,11 @@
-import { FlowchartOptions } from './Flowchart'
-import { PieChartOptions } from './PieChart'
-import { MermaidConfig } from './MermaidConfig'
+import type { FlowchartOptions } from './Flowchart'
+import type { PieChartOptions } from './PieChart'
+import type { MermaidConfig } from './MermaidConfig'
 
 type Prettify<T> = { [K in keyof T]: T[K] } & {}
 
 interface BaseMermaidGraph {
-    MermaidConfig?: Partial<MermaidConfig>,
+    config?: Partial<MermaidConfig>,
     classDefs?: Record<string, string>[],
 }
 
