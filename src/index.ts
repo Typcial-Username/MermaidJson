@@ -70,30 +70,6 @@ export function saveDiagramAsMarkdown(filepath: string, data: MermaidGraph) {
     writeFileSync(filepath, markdown, 'utf8');
 }
 
-const exampleGraph: MermaidGraph = {
-  graphType: 'flowchart',
-  direction: 'TD',
-  config: {
-    darkMode: true,
-    theme: 'dark',
-    look: 'handDrawn',
-  },
-  nodes: [
-    {
-      id: 'start',
-      label: 'Start',
-      // styleProps: {
-      //   fill: '#ff0000'
-      // },
-      children: [
-        {
-          id: 'stop',
-          label: 'Stop',
-          lineType: 'Arrow'
-        }
-      ]
-    }
-  ]
-}
-
-saveDiagramAsMarkdown('example.md', exampleGraph);
+export type { MermaidGraph } from './types/Types'
+export type { FlowchartNode, FlowchartOptions } from './types/Flowchart'
+export type { PieChartOptions } from './types/PieChart'
