@@ -14,33 +14,44 @@ jobs:
       release_uploaded: ${{ steps.release.outputs.uploaded }}
 
     steps:
-        - name: Checkout repository
-          uses: actions/checkout@v4
+      - name: Check if this is the latest tag
+        id: semver-check
+        run: |
+          LATEST_TAG=$(git tag --list 'v*' --sort=-v:refname | head -n1)
+          echo "Latest tag: $LATEST_TAG"
+          echo "Current ref: ${{ github.ref_name }}"
+          if [ "$LATEST_TAG" != "${{ github.ref_name }}" ]; then
+            echo "Not the latest tag, skipping workflow."
+            exit 78  # Special code to mark as neutral in GitHub Actions
+          fi
 
-        - name: Set up Node.js
-          uses: actions/setup-node@v4
-          with:
-            node-version: '20'
-            registry-url: 'https://registry.npmjs.org/'
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-        - name: Set up Bun
-          uses: oven-sh/setup-bun@v1
-          with:
-            bun-version: latest
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          registry-url: 'https://registry.npmjs.org/'
 
-        - name: Install dependencies
-          run: bun install
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
 
-        - name: Build the project
-          run: bun run build
+      - name: Install dependencies
+        run: bun install
 
-        - name: "Create GitHub Release"
-          id: release
-          uses: softprops/action-gh-release@v2
-          with:
-            tag_name: ${{ github.ref_name }}
-            generate_release_notes: true
-            draft: true
+      - name: Build the project
+        run: bun run build
+
+      - name: "Create GitHub Release"
+        id: release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          generate_release_notes: true
+          draft: true
   approve-and-publish:
     needs: build-and-release
     runs-on: ubuntu-latest

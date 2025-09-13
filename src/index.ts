@@ -41,9 +41,9 @@ export function saveMermaidJSON(filepath: string, data: MermaidGraph) {
 export function generateMermaidDiagram(data: MermaidGraph): string {
   console.log("Creating " + data.graphType + " diagram...");
 
-  let configStr = "---\nconfig:"
-
+  let configStr = ""
   if (data.config) {
+    configStr = "---\nconfig:"
     console.log("Using Mermaid Config:", data.config);
     // Apply Mermaid Config to diagram generation
     for (const key in data.config) {
