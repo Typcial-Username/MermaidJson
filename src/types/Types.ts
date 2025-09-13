@@ -9,10 +9,8 @@ interface BaseMermaidGraph {
     classDefs?: Record<string, string>[],
 }
 
-export type MermaidGraph = BaseMermaidGraph &
+export type MermaidGraph = Prettify<BaseMermaidGraph &
 (
     FlowchartOptions
     | PieChartOptions
-)
-
-type r = Prettify<MermaidGraph>
+)>

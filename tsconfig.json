@@ -5,7 +5,7 @@
     // Enable latest features
     "lib": ["ESNext", "DOM"],
     "target": "esnext",
-    "module": "es2022",
+    "module": "esnext",
     "moduleDetection": "force",
     "allowJs": true,
     "outDir": "dist",

@@ -5,8 +5,9 @@
   "version": "0.1.0",
   "author": "Levi Terry <levi@leviterry.dev>",
   "type": "module",
-  "types": "dist/index.d.ts",
-  "main": "dist/index.js",
+  "types": "./dist/esm/index.d.ts",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
   "homepage": "https://github.com/Typcial-Username/MermaidJson",
   "keywords": [
     "mermaid",
@@ -16,16 +17,16 @@
     "diagram"
   ],
   "scripts": {
-    "build": "tsc && tsc -p tsconfig.cjs.json && tsc -p tsconfig.esm.json",
+    "build": "npm run generate-config && tsc && tsc -p tsconfig.cjs.json && tsc -p tsconfig.esm.json && echo '🎉 Build complete!'",
     "prepare": "npm run build",
-    "generate-config": "ts-node ./src/scripts/GenerateMermaidConfig.ts",
+    "generate-config": "node --loader ts-node/esm ./scripts/GenerateMermaidConfig.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "license": "MIT",
   "files": [
-    "dist/**/*",
-    "README.md",
-    "package.json"
+    "dist/esm",
+    "dist/cjs",
+    "README.md"
   ],
   "repository": {
     "type": "git",
@@ -36,16 +37,18 @@
   },
   "exports": {
     ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js",
+      "types": "./dist/esm/index.d.ts"
     }
   },
   "devDependencies": {
-    "@types/bun": "latest",
-    "typescript": "^5.0.0"
+    "typescript": "^5.9.2"
   },
   "engines": {
     "node": ">=14.0.0"
+  },
+  "dependencies": {
+    "ts-node": "^10.9.2"
   }
 }

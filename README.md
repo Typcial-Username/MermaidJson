@@ -309,6 +309,13 @@ All standard Mermaid shapes are supported:
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
+**Note:**
+To generate the Mermaid Config from the schema, run
+
+```bash
+npm run generate-config
+```
+
 ## License
 
 MIT

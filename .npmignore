@@ -5,3 +5,4 @@ tsconfig.json
 *.test.ts
 *.test.js
 example.*
+MermaidConfig.ts
