@@ -13,6 +13,7 @@ export default defineConfig({
                 test: {
                     browser: {
                         headless: true,
+                        provider: 'playwright',
                         instances: [{ browser: 'chromium' }],
                     }
                 },
